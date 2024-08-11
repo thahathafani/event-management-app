@@ -16,14 +16,12 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Event Management System API');
 });
 
-mongoose.connect(process.env.MONGO_URI as string, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI as string)
   .then(() => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   })
-  .catch((err) => console.error(err));
+  .catch((err) => console.error('Failed to connect to MongoDB:', err));
+
